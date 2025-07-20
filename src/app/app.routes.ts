@@ -6,6 +6,7 @@ import { ChatsComponent } from './chats/chats.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
   { path: 'auth', component: AuthComponent },
   { path: 'chats', component: ChatsComponent },
   { path: 'dashboard', component: DashboardComponent },

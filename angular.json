@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DemoUI": {
+    "WChatPro": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/demo-ui",
+            "outputPath": "dist/wchatpro",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "DemoUI:build:production"
+              "buildTarget": "WChatPro:build:production"
             },
             "development": {
-              "buildTarget": "DemoUI:build:development"
+              "buildTarget": "WChatPro:build:development"
             }
           },
           "defaultConfiguration": "development"
