@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "WChatPro": {
+    "WhatsappMarketingApp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/wchatpro",
+            "outputPath": "dist/whatsappmarketingapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "WChatPro:build:production"
+              "buildTarget": "WhatsappMarketingApp:build:production"
             },
             "development": {
-              "buildTarget": "WChatPro:build:development"
+              "buildTarget": "WhatsappMarketingApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -95,5 +95,6 @@
   },
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "WhatsappMarketingApp"
 }

@@ -1,31 +1,62 @@
-<nav class="bg-gray-800 text-white">
+<nav class="bg-gray-900 text-white shadow-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex justify-between items-center h-16">
       
-      <!-- App name on the left -->
-      <div>
-        <span class="font-semibold text-lg">WChatPro</span>
+      <!-- App name -->
+      <div class="flex items-center space-x-2">
+      
+        <span class="text-xl font-bold tracking-wide text-yellow-400">Whatsapp Marketing</span>
       </div>
 
-      <!-- Links on the right -->
-      <div class="flex items-center space-x-4">
-        <a routerLink="/auth"
-           routerLinkActive="text-yellow-400"
-           class="hover:text-yellow-400 transition duration-200">Auth</a>
+      <!-- Navigation links -->
+      <div class="hidden md:flex items-center space-x-6">
+       
+
         <a routerLink="/dashboard"
            routerLinkActive="text-yellow-400"
            class="hover:text-yellow-400 transition duration-200">Dashboard</a>
+
         <a routerLink="/settings"
            routerLinkActive="text-yellow-400"
            class="hover:text-yellow-400 transition duration-200">Settings</a>
+
         <a routerLink="/chats"
            routerLinkActive="text-yellow-400"
            class="hover:text-yellow-400 transition duration-200">Chats</a>
+
+        <a routerLink="/Schedule"
+           routerLinkActive="text-yellow-400"
+           class="hover:text-yellow-400 transition duration-200">Schedule</a>
+
+        <a routerLink="/scheduled-list"
+           routerLinkActive="text-yellow-400"
+           class="hover:text-yellow-400 transition duration-200">Scheduled List</a>
+        <a routerLink="/Contacts"
+           routerLinkActive="text-yellow-400"
+           class="hover:text-yellow-400 transition duration-200">Contacts</a>
+   
+
+        <a routerLink="/send-message"
+           routerLinkActive="text-yellow-400"
+           class="hover:text-yellow-400 transition duration-200">Send Message</a>
+           <a routerLink="/auth"
+   routerLinkActive="bg-yellow-400 text-gray-900"
+   class="bg-gray-800 hover:bg-yellow-400 hover:text-gray-900 px-3 py-1 rounded-md transition duration-200">
+   Login
+</a>
+
+      </div>
+
+      <!-- Mobile menu icon -->
+      <div class="md:hidden">
+        <!-- You can add a menu toggle button here if you want -->
       </div>
     </div>
   </div>
 </nav>
 
-<main class="p-4">
-  <router-outlet></router-outlet>
+<main class="bg-gray-50 min-h-screen p-6">
+  <div class="max-w-7xl mx-auto">
+    <router-outlet></router-outlet>
+  </div>
 </main>
