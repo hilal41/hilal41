@@ -1,20 +1,26 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-auth',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, ButtonModule, InputTextModule],
+
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css'
 })
 export class AuthComponent {
+  email = '';
+  password = '';
 
-   email: string = '';
-  password: string = '';
+  constructor(private router: Router) {}
 
-  submitForm() {
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
+  login() {
+    console.log('Login data:', { email: this.email, password: this.password });
+    localStorage.setItem('loggedIn', 'true');
+    this.router.navigate(['/dashboard']);
   }
-
 }

@@ -1,0 +1,7 @@
+/* Optional enhancements with your theme.css already applied */
+.custom-navbar {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--surface-0);
+  box-shadow: var(--shadow-2);
+}
