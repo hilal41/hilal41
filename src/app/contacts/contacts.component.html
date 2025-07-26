@@ -1,1 +1,132 @@
-<p>contacts works!</p>
+<div class="card bg-white rounded-xl shadow-lg p-6 max-w-5xl mx-auto mt-8">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+      <span class="pi pi-users text-blue-600"></span> Contacts
+    </h2>
+    <button
+  pButton
+  type="button"
+  icon="pi pi-plus"
+  label="Create New Contact"
+  class="p-button-primary p-button-rounded p-button-lg flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-200 border-0 px-6 py-3 text-lg font-semibold"
+  (click)="addContact()"
+  aria-label="Create New Contact"
+></button>
+  </div>
+  <p-table
+    [value]="contacts"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    class="w-full"
+    [stripedRows]="false"
+  >
+    <ng-template pTemplate="header">
+      <tr class="bg-blue-50">
+        <th class="py-3 px-4 text-left font-semibold text-gray-700">Full Name</th>
+        <th class="py-3 px-4 text-left font-semibold text-gray-700">Email</th>
+        <th class="py-3 px-4 text-left font-semibold text-gray-700">Contact Number</th>
+        <th class="py-3 px-4 text-center font-semibold text-gray-700">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
+      <tr [ngClass]="rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'" class="hover:bg-blue-50 transition">
+        <td class="py-2 px-4">{{ contact.fullName }}</td>
+        <td class="py-2 px-4">{{ contact.email }}</td>
+        <td class="py-2 px-4">{{ contact.countryCode }}{{ contact.contactNumber }}</td>
+        <td class="py-2 px-4 text-center">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-pencil"
+            class="p-button-sm p-button-text text-blue-600 hover:bg-blue-100 mr-2"
+            (click)="editContact(contact)"
+            aria-label="Edit"
+            pTooltip="Edit Contact"
+            tooltipPosition="top"
+          ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-sm p-button-text text-red-600 hover:bg-red-100"
+            (click)="deleteContact(contact)"
+            aria-label="Delete"
+            pTooltip="Delete Contact"
+            tooltipPosition="top"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<p-dialog [header]="isAddMode ? 'Add Contact' : 'Edit Contact'" [(visible)]="displayEditDialog" [modal]="true" [closable]="false" [style]="{width: '420px'}" contentStyleClass="p-0">
+  <form *ngIf="editableContact" (ngSubmit)="saveContact()" class="p-6 bg-gray-50 rounded-lg">
+    <div class="flex flex-col items-center mb-6">
+      <span class="pi pi-user-plus text-blue-500 text-4xl mb-2"></span>
+      <h3 class="text-xl font-semibold text-gray-800">{{ isAddMode ? 'Add a New Contact' : 'Edit Contact' }}</h3>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block font-semibold mb-1 text-gray-700">Full Name</label>
+        <input type="text" pInputText [(ngModel)]="editableContact.fullName" name="fullName" required class="w-full bg-white border border-gray-200 rounded px-3 py-2 focus:border-blue-400 focus:outline-none" placeholder="Enter full name" />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1 text-gray-700">Email</label>
+        <input type="email" pInputText [(ngModel)]="editableContact.email" name="email" required class="w-full bg-white border border-gray-200 rounded px-3 py-2 focus:border-blue-400 focus:outline-none" placeholder="Enter email address" />
+      </div>
+      <div class="flex gap-3">
+        <div class="w-2/5">
+          <label class="block font-semibold mb-1 text-gray-700">Country Code</label>
+          <p-dropdown
+            [options]="countryCodes"
+            [(ngModel)]="editableContact.countryCode"
+            name="countryCode"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Country Code"
+            class="w-full"
+            [showClear]="true"
+            appendTo="body"
+            required
+          ></p-dropdown>
+        </div>
+        <div class="flex-1">
+          <label class="block font-semibold mb-1 text-gray-700">Contact Number</label>
+          <input type="text" pInputText [(ngModel)]="editableContact.contactNumber" name="contactNumber" required class="w-full bg-white border border-gray-200 rounded px-3 py-2 focus:border-blue-400 focus:outline-none" placeholder="Enter contact number" />
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-200 mt-6 pt-5 flex justify-between items-center">
+      <button *ngIf="!isAddMode" type="button" pButton label="Delete" class="p-button-danger" (click)="openDeleteFromDialog()"></button>
+      <div class="flex gap-2 ml-auto">
+        <button type="button" pButton label="Cancel" class="p-button-secondary" (click)="cancelEdit()"></button>
+        <button type="submit" pButton label="Update" class="p-button-success" *ngIf="!isAddMode"></button>
+        <button type="submit" pButton label="Save" class="p-button-success" *ngIf="isAddMode"></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+<!-- Delete Confirmation Dialog -->
+<p-dialog
+  header="Confirm Delete"
+  [(visible)]="displayDeleteDialog"
+  [modal]="true"
+  [closable]="false"
+  [style]="{width: '350px'}"
+  contentStyleClass="p-0"
+>
+  <div class="p-6 text-center">
+    <span class="pi pi-exclamation-triangle text-yellow-500 text-4xl mb-4 inline-block"></span>
+    <div class="mb-4 text-lg text-gray-800">
+      Are you sure you want to delete <span class="font-bold">{{ selectedContactToDelete?.fullName }}</span>?
+    </div>
+    <div class="flex justify-center gap-3 mt-4">
+      <button pButton type="button" label="Cancel" class="p-button-secondary" (click)="cancelDelete()"></button>
+      <button pButton type="button" label="Delete" class="p-button-danger" (click)="confirmDelete()"></button>
+    </div>
+  </div>
+</p-dialog>
