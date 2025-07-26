@@ -95,6 +95,5 @@
   },
   "cli": {
     "analytics": false
-  },
-  "defaultProject": "WhatsappMarketingApp"
+  }
 }

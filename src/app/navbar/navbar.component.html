@@ -1,18 +1,27 @@
-<p-menubar [model]="isLoggedIn ? items : []" class="custom-navbar">
-  <ng-template #start>
-    <span class="text-xl font-bold text-primary">Whatsapp Marketing</span>
-  </ng-template>
-
-  <ng-template #item let-item let-root="root">
-    <a pRipple class="flex items-center p-menubar-item-link" [routerLink]="item.routerLink">
-      <span class="pi" [ngClass]="item.icon"></span>
-      <span class="ml-2">{{ item.label }}</span>
-    </a>
-  </ng-template>
-
-  <ng-template #end>
-    <ng-container *ngIf="!isLoggedIn">
-      <button pButton label="Login" (click)="router.navigate(['/auth'])" class="p-button-sm"></button>
-    </ng-container>
-  </ng-template>
-</p-menubar>
+<nav class="w-full bg-gradient-to-r from-blue-700 to-blue-500 shadow-lg rounded-b-xl">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    <!-- Brand/Logo -->
+    <div class="flex items-center gap-3">
+      <span class="pi pi-whatsapp text-3xl text-white"></span>
+      <span class="text-2xl font-extrabold tracking-tight text-white">Whatsapp Marketing</span>
+    </div>
+    <!-- Navigation Links -->
+    <div class="flex gap-1 md:gap-2 lg:gap-4">
+      <ng-container *ngFor="let item of isLoggedIn ? items : []">
+        <a pRipple
+          [routerLink]="item.routerLink"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-white font-semibold hover:bg-blue-600 hover:text-yellow-300 transition-colors duration-150"
+          routerLinkActive="bg-blue-900 text-yellow-300"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="pi" [ngClass]="item.icon"></span>
+          <span>{{ item.label }}</span>
+        </a>
+      </ng-container>
+    </div>
+    <!-- Login Button -->
+    <div *ngIf="!isLoggedIn">
+      <button pButton label="Login" (click)="router.navigate(['/auth'])" class="p-button-rounded p-button-warning font-bold px-5 py-2 ml-3 shadow"></button>
+    </div>
+  </div>
+</nav>

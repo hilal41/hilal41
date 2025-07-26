@@ -1,10 +1,16 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
-    <h2 class="text-center text-2xl font-bold mb-4">Login</h2>
-    <form (ngSubmit)="login()">
-      <input type="email" placeholder="Email" [(ngModel)]="email" name="email" class="p-inputtext w-full mb-3" required />
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" class="p-inputtext w-full mb-3" required />
-      <button pButton label="Login" class="w-full" type="submit"></button>
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
+  <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-xl w-full max-w-md border border-blue-100 dark:border-gray-800">
+    <h2 class="text-center text-3xl font-extrabold text-blue-700 dark:text-blue-200 mb-6 tracking-tight">Sign in to your account</h2>
+    <form (ngSubmit)="login()" class="space-y-5">
+      <div>
+        <label for="email" class="block mb-1 font-medium text-gray-700 dark:text-gray-200">Email</label>
+        <input pInputText id="email" type="email" placeholder="you@example.com" [(ngModel)]="email" name="email" class="w-full" required />
+      </div>
+      <div>
+        <label for="password" class="block mb-1 font-medium text-gray-700 dark:text-gray-200">Password</label>
+        <input pInputText id="password" type="password" placeholder="Password" [(ngModel)]="password" name="password" class="w-full" required />
+      </div>
+      <button pButton label="Login" class="w-full font-bold" type="submit"></button>
     </form>
   </div>
 </div>
